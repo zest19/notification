@@ -28,7 +28,7 @@ app.get('/sendnoti/:token/:title/:body/:menu', (req, res) => {
     const title = req.params.title;
     const body = req.params.body;
     const menu = req.params.menu;
-    let result = init(deviceToken, title, body);
+    let result = init(deviceToken, title, body, menu);
     return res.send({ 
         error: false, 
         data:[{
@@ -60,13 +60,14 @@ function getAccessToken() {
     })
 }
 
-async function init(deviceToken, title, message) {
+async function init(deviceToken, title, message, menu) {
     const body = {
         message: {
             data: { key: 'value' },
             notification: {
                 title: title,
-                body: message
+                body: message,
+                menu: menu
             },
             webpush: {
                 headers: {
