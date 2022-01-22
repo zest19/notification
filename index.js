@@ -16,14 +16,14 @@ const serviceAccount = require('./newharty-3dc30-firebase-adminsdk-p73fl-86aa461
 const databaseURL = 'https://newharty-3dc30.firebaseio.com'
 const URL =
 'https://fcm.googleapis.com/v1/projects/newharty-3dc30/messages:send'
- 
+
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: databaseURL
 })
-
 // send noti to device by token
 app.post('/sendnoti', (req, res) => {
+
     let result = init(req.body);
     return res.send({ 
         error: false, 
@@ -60,27 +60,26 @@ async function init(data) {
     }
     const body = {
         message: {
-            data: { key: 'value' },
+        data: { key: 'value' },
+        notification: {
+            title: data.title,
+            body: data.body
+        },
+        webpush: {
+            headers: {
+            Urgency: 'high'
+            },
             notification: {
-                title: data.title,
-                body: data.body
-            },
-            webpush: {
-                headers: {
-                Urgency: 'high'
-                },
-                notification: {
-                requireInteraction: 'true'
-                }
-            },
-            data: {
-                menu: data.menu,
-                chatuserid:chatuserid,
-            },
-            token: deviceToken
+            requireInteraction: 'true'
+            }
+        },
+        data: {
+            menu: data.menu,
+            chatuserid:chatuserid,
+        },
+        token: data.token
         }
     }
-    
     try {
         const accessToken = await getAccessToken()
         console.log('accessToken: ', accessToken)
