@@ -28,7 +28,14 @@ app.get('/sendnoti/:token', (req, res) => {
     const title = req.body.title;
     const body = req.body.body;
     let result = init(deviceToken, title, body);
-    return res.send({ error: false, data:result, token:deviceToken})
+    return res.send({ 
+        error: false, 
+        data:[{
+            'title':title,
+            'body':body,
+            'deviceToken':deviceToken
+        }], 
+    })
 })
 
 function getAccessToken() {
