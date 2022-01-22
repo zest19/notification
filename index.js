@@ -88,8 +88,6 @@ async function init(deviceToken) {
 }
 
 
-app.listen(3001, () => {
-    console.log('Node run on port 3001')
-});
+app.listen(process.env.PORT);
 
 // init()
