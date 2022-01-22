@@ -54,7 +54,7 @@ function getAccessToken() {
 }
 
 async function init(data) {
-    let chatuserid = null;
+    let chatuserid;
     if (typeof data.chatuserid !== 'undefined') {
         chatuserid = data.chatuserid;
     }
