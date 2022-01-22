@@ -23,7 +23,7 @@ admin.initializeApp({
 })
 
 // send noti to device by token
-app.get('/sendnoti', (req, res) => {
+app.post('/sendnoti', (req, res) => {
     let result = init(req.body);
     return res.send({ 
         error: false, 
