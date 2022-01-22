@@ -51,13 +51,13 @@ function getAccessToken() {
     })
 }
 
-async function init(deviceToken, title, body) {
+async function init(deviceToken, title, message) {
     const body = {
         message: {
         data: { key: 'value' },
         notification: {
             title: title,
-            body: body
+            body: message
         },
         webpush: {
             headers: {
