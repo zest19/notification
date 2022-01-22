@@ -24,9 +24,11 @@ admin.initializeApp({
 
 // send noti to device by token
 app.get('/sendnoti/:token', (req, res) => {
-    let deviceToken = req.params.token;
-    let result = init(deviceToken);
-    return res.send({ error: false, data:result})
+    const deviceToken = req.params.token;
+    const title = req.body.title;
+    const body = req.body.body;
+    let result = init(deviceToken, title, body);
+    return res.send({ error: false, data:result, token:deviceToken})
 })
 
 function getAccessToken() {
