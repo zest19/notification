@@ -76,6 +76,9 @@ async function init(deviceToken, title, message) {
                 requireInteraction: 'true'
                 }
             },
+            data: {
+                menu: "Test"
+            },
             token: deviceToken
         }
     }
