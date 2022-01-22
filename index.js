@@ -23,17 +23,17 @@ admin.initializeApp({
 })
 
 // send noti to device by token
-app.get('/sendnoti', (req, res) => {
-    const deviceToken = req.body.token;
-    const title = req.body.title;
-    const body = req.body.body;
+app.get('/sendnoti/:token/:title/:body', (req, res) => {
+    const deviceToken = req.params.token;
+    const title = req.params.title;
+    const body = req.params.body;
     let result = init(deviceToken, title, body);
     return res.send({ 
         error: false, 
         data:[{
+            'deviceToken':deviceToken, 
             'title':title,
-            'body':body,
-            'deviceToken':deviceToken
+            'body':body
         }], 
     })
 })
