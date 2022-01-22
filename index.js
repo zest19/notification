@@ -23,19 +23,12 @@ admin.initializeApp({
 })
 
 // send noti to device by token
-app.get('/sendnoti/:token/:title/:body/:menu', (req, res) => {
-    const deviceToken = req.params.token;
-    const title = req.params.title;
-    const body = req.params.body;
-    const menu = req.params.menu;
-    let result = init(deviceToken, title, body, menu);
+app.get('/sendnoti', (req, res) => {
+    let result = init(req.body);
     return res.send({ 
         error: false, 
         data:[{
-            'deviceToken':deviceToken, 
-            'title':title,
-            'body':body,
-            'menu':menu
+            'data':req.body
         }], 
     })
 })
@@ -60,13 +53,17 @@ function getAccessToken() {
     })
 }
 
-async function init(deviceToken, title, message, menu) {
+async function init(data) {
+    let chatuserid = null;
+    if (typeof data.chatuserid !== 'undefined') {
+        chatuserid = data.chatuserid;
+    }
     const body = {
         message: {
             data: { key: 'value' },
             notification: {
-                title: title,
-                body: message
+                title: data.title,
+                body: data.body
             },
             webpush: {
                 headers: {
@@ -77,7 +74,8 @@ async function init(deviceToken, title, message, menu) {
                 }
             },
             data: {
-                menu: menu
+                menu: data.menu,
+                chatuserid:chatuserid,
             },
             token: deviceToken
         }
