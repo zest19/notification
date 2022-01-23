@@ -33,14 +33,6 @@ app.post('/sendnoti', (req, res) => {
     })
 })
 
-// get time stamp
-app.get('/timestamp', (req, res) => {
-    return res.send({ 
-        error: false, 
-        data:Date.now(), 
-    })
-})
-
 function getAccessToken() {
     return new Promise(function(resolve, reject) {
         var key = serviceAccount
