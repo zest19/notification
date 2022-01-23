@@ -34,7 +34,7 @@ app.post('/sendnoti', (req, res) => {
 })
 
 // get time stamp
-app.post('/timestamp', (req, res) => {
+app.get('/timestamp', (req, res) => {
     return Date.now();
 })
 
