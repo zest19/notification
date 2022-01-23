@@ -21,9 +21,9 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: databaseURL
 })
+
 // send noti to device by token
 app.post('/sendnoti', (req, res) => {
-
     let result = init(req.body);
     return res.send({ 
         error: false, 
@@ -31,6 +31,11 @@ app.post('/sendnoti', (req, res) => {
             'data':req.body
         }], 
     })
+})
+
+// get time stamp
+app.post('/timestamp', (req, res) => {
+    return Date.now();
 })
 
 function getAccessToken() {
