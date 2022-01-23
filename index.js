@@ -35,10 +35,7 @@ app.post('/sendnoti', (req, res) => {
 
 // get time stamp
 app.get('/timestamp', (req, res) => {
-    return res.send({ 
-        error: false, 
-        data:Date.now(), 
-    })
+    return res.send(Date.now());
 })
 
 function getAccessToken() {
